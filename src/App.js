@@ -2,6 +2,10 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  // Add console log statements here to check environment variables
+  console.log("OpenAI API Key:", process.env.REACT_APP_OPENAI_API_KEY);
+  console.log("Google Credentials Path:", process.env.REACT_APP_GOOGLE_APPLICATION_CREDENTIALS);
+
   return (
     <div className="App">
       <header className="App-header">

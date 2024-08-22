@@ -21,3 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+#Ensure the following files is not tracked by git
+.env
+google-credentials.json
+
