@@ -33,5 +33,5 @@ const transcribeAudio = async (audioFilePath) => {
 // This function sends a request to Google Speech-to-Text to transcribe audio
 
 module.exports = {
-    transcribeAudio,
+    transcribeAudio
 };
