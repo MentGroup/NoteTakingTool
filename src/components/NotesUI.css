@@ -1,6 +1,6 @@
 body {
-    background-color: #f7f1e3; /* Light paper-like background */
-    font-family: 'Georgia', serif; /* Classic, readable font */
+    background-color: #f7f1e3; 
+    font-family: 'Georgia', serif; 
 }
 
 #notes-container {
@@ -11,7 +11,7 @@ body {
     border: 1px solid #e1d8b4;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-    background-image: url('../assets/paper-texture.jpeg'); /* Correct path to the texture */
+    background-image: url('../assets/paper-texture.jpeg'); 
     background-size: cover;
     background-repeat: no-repeat;
     position: relative;
@@ -19,7 +19,7 @@ body {
 
 /* Topic styling */
 .topic {
-    font-size: 2em; /* Larger topic header */
+    font-size: 2em; 
     font-weight: bold;
     margin-top: 30px;
     margin-bottom: 10px;
@@ -27,48 +27,73 @@ body {
     text-decoration: underline;
 }
 
-/* Note styling */
 .note {
-    font-size: 1.6em; /* Slightly larger notes */
+    font-size: 1.6em;
     margin-left: 20px;
     margin-bottom: 20px;
     padding: 10px 15px;
-    border-left: 4px solid #d1a054; /* Left border to simulate margin notes */
-    background-color: rgba(255, 255, 255, 0.7); /* Slightly opaque background */
+    border-left: 4px solid #d1a054;
+    background-color: rgba(255, 255, 255, 0.7);
     line-height: 1.6;
     border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    text-align: left; /* Left alignment for notes */
-    text-indent: 20px; /* Indent the first line of each note */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    text-indent: 20px;
+    outline: none;
+    transition: background-color 0.3s ease;
+    caret-color: black;
+}
+
+.note:hover {
+    background-color: #e0e0e0; /* Darker on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border-left: 4px solid #b08d57;
+}
+
+
+
+/* Note styling */
+.note {
+    font-size: 1.6em; 
+    margin-left: 20px;
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    border-left: 4px solid #d1a054; 
+    background-color: rgba(255, 255, 255, 0.7); 
+    line-height: 1.6;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    text-align: left; 
+    text-indent: 20px; 
     outline: none;
 }
 
-/* Download button */
+/*Download Button */
 .download-btn {
     padding: 12px 24px;
-    background-color: #007bff; /* Blue color for the button */
+    background-color: #007bff; 
     color: white;
     border: none;
     cursor: pointer;
     font-size: 1.4em;
     border-radius: 5px;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
 }
 
 .download-btn:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #0056b3; 
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
 
 /* Small instruction text */
 .instruction-text {
-    font-size: 1.4em; /* Bigger text, but not too big */
-    font-weight: bold; /* Bold */
-    font-style: italic; /* Italic */
-    text-decoration: underline; /* Underlined */
-    color: black; /* Black color */
-    font-family: 'Times New Roman', serif; /* A classic, readable font */
+    font-size: 1.4em; 
+    font-weight: bold; 
+    font-style: italic; 
+    text-decoration: underline; 
+    color: black; 
+    font-family: 'Times New Roman', serif; 
     position: absolute;
     right: 30px;
     bottom: 20px;
