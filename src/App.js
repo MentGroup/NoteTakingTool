@@ -1,29 +1,30 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+import NotesUI from './components/NotesUI';
 
 function App() {
-  // Add console log statements here to check environment variables
-  console.log("OpenAI API Key:", process.env.REACT_APP_OPENAI_API_KEY);
-  console.log("Google Credentials Path:", process.env.REACT_APP_GOOGLE_APPLICATION_CREDENTIALS);
+    const [notes, setNotes] = useState({}); // Initialize with an empty object
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    useEffect(() => {
+        // Simulate fetching or generating notes data with mock data
+        const mockNotes = {
+            "Spider-Man": [
+                "Likes to fight bad guys",
+                "Enjoys saving the day",
+                "Real name is Peter Parker"
+            ],
+            "Arch Enemy Venom": [
+                "Venom is Spider-Man's arch enemy"
+            ]
+        };
+        setNotes(mockNotes);
+    }, []);
+
+    return (
+        <div className="App">
+            <NotesUI notes={notes} />
+        </div>
+    );
 }
 
 export default App;
