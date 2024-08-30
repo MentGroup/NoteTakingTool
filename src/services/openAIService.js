@@ -12,7 +12,8 @@ const openai = new OpenAI({
 const generateNotes = async (transcript, retries = 3) => {
     const messages = [
         { role: "system", content: "You are a helpful assistant that generates concise notes from transcripts." },
-        { role: "user", content: `Given the following transcript, generate concise relevant notes highlighting the key points, and ensure each note clearly mentions its corresponding topic:\n\n${transcript}`}
+        { role: "user", content: `Please take the following transcript and organize it into notes. Each topic should be clearly marked as "### Topic Name ###" and each note should be indented under the relevant topic:\n\n${transcript}` }
+        //Tring to format response so it will be easy for noteOrganizer.js to organize notes to respective topics
     ];
     
     for (let attempt = 1; attempt <= retries; attempt++) { // For loop in case GPT-3 is having issues we can retry 3 times
