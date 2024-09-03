@@ -27,6 +27,17 @@ body {
     text-decoration: underline;
 }
 
+/* The container for the download button and instruction text */
+#bottom-right-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    width: 100%;
+    position: relative;
+    padding: 0 20px;
+}
+
 .note {
     font-size: 1.6em;
     margin-left: 20px;
@@ -45,12 +56,10 @@ body {
 }
 
 .note:hover {
-    background-color: #e0e0e0; /* Darker on hover */
+    background-color: #e0e0e0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     border-left: 4px solid #b08d57;
 }
-
-
 
 /* Note styling */
 .note {
@@ -70,15 +79,16 @@ body {
 
 /*Download Button */
 .download-btn {
-    padding: 12px 24px;
+    padding: 16px 32px;
     background-color: #007bff; 
     color: white;
     border: none;
     cursor: pointer;
-    font-size: 1.4em;
-    border-radius: 5px;
+    font-size: 2em;
+    border-radius: 10px;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px; /* Adjust spacing between the button and instruction text */
 }
 
 .download-btn:hover {
@@ -88,13 +98,13 @@ body {
 
 /* Small instruction text */
 .instruction-text {
-    font-size: 1.4em; 
+    font-size: 1.8em; 
     font-weight: bold; 
     font-style: italic; 
     text-decoration: underline; 
     color: black; 
-    font-family: 'Times New Roman', serif; 
+    font-family: 'Times New Roman', serif;
     position: absolute;
-    right: 30px;
-    bottom: 20px;
+    right: 50px;
+    bottom: 30px;
 }

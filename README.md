@@ -73,3 +73,12 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 # AI-Transcription
 AI Transcription Tool for MENT.
 >>>>>>> 3cd74a1af4849af74273f5d98bc00c3559b0278e
+## Requirements
+
+This project requires `ffmpeg` to be installed on your system. Please install `ffmpeg` before running the project.
+
+### Installation Instructions
+
+- **macOS**: 
+  ```bash
+  brew install ffmpeg

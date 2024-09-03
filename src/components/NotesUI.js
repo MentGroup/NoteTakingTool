@@ -24,7 +24,7 @@ const NotesUI = ({ notes = {} }) => {
             <div id="notes-container">
                 {renderNotes()}
             </div>
-            <div className="controls">
+            <div id="bottom-right-container">
                 <button className="download-btn" onClick={downloadNotes}>Download Notes as PDF</button>
                 <span className="instruction-text">Click any note to edit</span>
             </div>

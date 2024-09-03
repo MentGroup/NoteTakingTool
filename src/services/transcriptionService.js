@@ -15,7 +15,6 @@ const transcribeAudio = async (audioFilePath) => {
         audio: { content: audioBytes },
         config: {
             encoding: 'LINEAR16',
-            sampleRateHertz: 16000,
             languageCode: 'en-US',
         },
         // Prepare request with configured settings for Speech-to-Text

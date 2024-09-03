@@ -30,6 +30,7 @@ const groupNotesByTopic = (notes) => {
 
     notes.forEach(note => { //Loop through each note in the array 
         note = note.trim();
+        if (!note) return; //Skip empty notes
 
         // Check if the note is a topic header (e.g., "### Topic Name ###")
         if (note.startsWith("###") && note.endsWith("###")) {
