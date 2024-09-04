@@ -1,25 +1,32 @@
 {
-  "7 Deadly Sins of Speaking": [
-    "- Speaking ill of somebody who's not present",
-    "- Judging and making others feel judged",
-    "- Negativity and complaining",
-    "- Making excuses and not taking responsibility",
-    "- Exaggeration and lying",
-    "- Dogmatism and confusing facts with opinions"
+  "Organic Compounds in Biology": [
+    "- Organic compounds contain carbon and include nucleic acids, proteins, carbohydrates, and lipids.",
+    "- Monomers of organic compounds are nucleotides, amino acids, monosaccharides, and fatty acids/glycerol."
   ],
-  "4 Cornerstones of Powerful Speech": [
-    "- Honesty: Being true and clear in what you say",
-    "- Authenticity: Being yourself and standing in your own truth",
-    "- Integrity: Being trustworthy and doing what you say",
-    "- Love: Wishing well for others and avoiding harsh judgments"
+  "Water Properties in Biology": [
+    "- Water is a universal solvent, polar, and exhibits cohesion, adhesion, and high surface tension.",
+    "- Hydrophilic molecules interact with water, while hydrophobic molecules repel water."
   ],
-  "Tools for Enhancing Speaking Power": [
-    "- Register: Using different vocal registers for impact",
-    "- Timbre: Improving the richness and warmth of your voice",
-    "- Prosody: Adding melody and variation to your speech for meaning",
-    "- Pace: Adjusting speed to emphasize points",
-    "- Silence: Using pauses for emphasis and power",
-    "- Pitch: Modulating pitch for different meanings",
-    "- Volume: Using volume strategically"
+  "Cell Biology Basics": [
+    "- Cells are basic units of life with genetic information (DNA) and cell membrane (phospholipid bilayer).",
+    "- Two cell types: eukaryotes (nucleus and organelles) and prokaryotes (no nucleus or organelles).",
+    "- Plant cells have chloroplasts for photosynthesis and larger vacuoles."
+  ],
+  "Cell Membrane and Transport": [
+    "- Cell membrane is a phospholipid bilayer, and transport mechanisms include diffusion, facilitated diffusion, and active transport.",
+    "- Osmosis is the movement of water across a membrane from high to low concentration."
+  ],
+  "Enzymes and Cellular Processes": [
+    "- Enzymes are biological catalysts affected by temperature and pH.",
+    "- Cellular respiration in mitochondria produces ATP from glucose and oxygen.",
+    "- Photosynthesis in plants converts carbon dioxide, sunlight, and water into glucose and oxygen."
+  ],
+  "Genetics and DNA": [
+    "- DNA contains bases A, T, G, C, replicates during the S phase, and is double-stranded.",
+    "- Protein synthesis involves transcription and translation.",
+    "- RNA is single-stranded with uracil (U) instead of thymine (T)."
+  ],
+  "Evolution and...": [
+    "- (The text provided is incomplete, please provide more information for this topic.)"
   ]
 }

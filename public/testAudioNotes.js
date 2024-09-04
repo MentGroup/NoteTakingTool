@@ -114,7 +114,7 @@ const startReactApp = () => {
 };
 
 // Run the test and then start the React app
-const audioFilePath = '/Users/ayushbhanot/Documents/Coding/Riipen/AITranscriptionApp/TestAudios/GoalsToSelf.wav';
+const audioFilePath = '/Users/ayushbhanot/Documents/Coding/Riipen/AITranscriptionApp/TestAudios/Bio25minCram.wav';
 runTest(audioFilePath);
 startReactApp();
 
@@ -131,4 +131,10 @@ Speaking Skills (10:00):
 
 Goals to Self (3:45):
 /Users/ayushbhanot/Documents/Coding/Riipen/AITranscriptionApp/TestAudios/GoalsToSelf.wav
+
+How to Achieve Most Ambitious Goals (18:00):
+/Users/ayushbhanot/Documents/Coding/Riipen/AITranscriptionApp/TestAudios/AmbitiousGoals.wav
+
+Bio 25 Mins Crammed (25:40):
+/Users/ayushbhanot/Documents/Coding/Riipen/AITranscriptionApp/TestAudios/Bio25minCram.wav
 */

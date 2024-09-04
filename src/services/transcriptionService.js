@@ -26,7 +26,7 @@ const transcribeAudio = async (audioFilePath) => {
         .map(result => result.alternatives[0].transcript)
         .join('\n');
     // Process the transcription response
-    console.log('Transcription:', transcription);
+    // console.log('Transcription:', transcription);
     return transcription;
 };
 // This function sends a request to Google Speech-to-Text to transcribe audio
