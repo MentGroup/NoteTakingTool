@@ -1,32 +1,45 @@
 {
-  "Organic Compounds in Biology": [
-    "- Organic compounds contain carbon and include nucleic acids, proteins, carbohydrates, and lipids.",
-    "- Monomers of organic compounds are nucleotides, amino acids, monosaccharides, and fatty acids/glycerol."
+  "Effect of Sharing Personal Goals": [
+    "- Sharing personal goals can lead to a false sense of accomplishment.",
+    "- Psychology tests show sharing goals makes individuals less likely to achieve them.",
+    "- Social acknowledgment of a goal can trick the mind into feeling it's already accomplished."
   ],
-  "Water Properties in Biology": [
-    "- Water is a universal solvent, polar, and exhibits cohesion, adhesion, and high surface tension.",
-    "- Hydrophilic molecules interact with water, while hydrophobic molecules repel water."
+  "Studies on Sharing Goals": [
+    "- Kurt Lewin in 1926 called this phenomenon \"substitution.\"",
+    "- Vermeer in 1933 found acknowledging goals by others made them feel real in the mind.",
+    "- Peter Gollwitzer wrote a book on this in 1982 and conducted tests in 2009.",
+    "- Tests in 2009 showed individuals who announced goals worked less on tasks compared to those who kept goals private."
   ],
-  "Cell Biology Basics": [
-    "- Cells are basic units of life with genetic information (DNA) and cell membrane (phospholipid bilayer).",
-    "- Two cell types: eukaryotes (nucleus and organelles) and prokaryotes (no nucleus or organelles).",
-    "- Plant cells have chloroplasts for photosynthesis and larger vacuoles."
+  "Recommendations to Achieve Goals": [
+    "- Resist announcing goals.",
+    "- Delay gratification of social acknowledgment.",
+    "- Talking about goals can trick the mind into feeling accomplished without actual progress.",
+    "- If necessary to share, frame it in a way that does not provide immediate satisfaction."
   ],
-  "Cell Membrane and Transport": [
-    "- Cell membrane is a phospholipid bilayer, and transport mechanisms include diffusion, facilitated diffusion, and active transport.",
-    "- Osmosis is the movement of water across a membrane from high to low concentration."
+  "Cell Biology: Plant vs. Animal Cells": [
+    "- Plant cells have chloroplasts for photosynthesis.",
+    "- Plant cells have a large central vacuole.",
+    "- Animal cells do not have chloroplasts and have smaller vacuoles.",
+    "- Both cells are eukaryotic with cell membranes made of a phospholipid bilayer."
   ],
-  "Enzymes and Cellular Processes": [
-    "- Enzymes are biological catalysts affected by temperature and pH.",
-    "- Cellular respiration in mitochondria produces ATP from glucose and oxygen.",
-    "- Photosynthesis in plants converts carbon dioxide, sunlight, and water into glucose and oxygen."
+  "Cell Membrane Permeability": [
+    "- Molecules move across the cell membrane through simple diffusion, facilitated diffusion, and active transport.",
+    "- Simple diffusion is from high to low concentration without energy.",
+    "- Facilitated diffusion uses protein channels.",
+    "- Active transport moves particles against concentration gradient using ATP energy."
   ],
-  "Genetics and DNA": [
-    "- DNA contains bases A, T, G, C, replicates during the S phase, and is double-stranded.",
-    "- Protein synthesis involves transcription and translation.",
-    "- RNA is single-stranded with uracil (U) instead of thymine (T)."
+  "Osmosis and Cellular Respiration": [
+    "- Osmosis is water movement from high to low concentration.",
+    "- In isotonic solutions, water moves freely in and out of the cell.",
+    "- Hypotonic solutions cause water to move into the cell.",
+    "- Hypertonic solutions cause water to move out of the cell."
   ],
-  "Evolution and...": [
-    "- (The text provided is incomplete, please provide more information for this topic.)"
+  "Enzymes and Cellular Functions": [
+    "- Enzymes are biological catalysts that speed up reactions.",
+    "- Enzymes are affected by temperature and pH changes.",
+    "- Extreme conditions can denature enzymes, affecting their function."
+  ],
+  "Cellular Respiration and Photosynthesis": [
+    "- Cellular respiration occurs in mitochondria."
   ]
 }

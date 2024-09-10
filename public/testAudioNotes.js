@@ -114,7 +114,7 @@ const startReactApp = () => {
 };
 
 // Run the test and then start the React app
-const audioFilePath = '/Users/ayushbhanot/Documents/Coding/Riipen/AITranscriptionApp/TestAudios/Bio25minCram.wav';
+const audioFilePath = '/Users/ayushbhanot/Documents/Coding/Riipen/AITranscriptionApp/TestAudios/GoalsToSelf.wav';
 runTest(audioFilePath);
 startReactApp();
 

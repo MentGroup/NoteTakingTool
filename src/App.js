@@ -1,28 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
-import NotesUI from './components/NotesUI';
+import React, { useState } from 'react';
+import { startRecording, stopRecording } from './services/audioRecording'; // Adjust path as needed
 
 function App() {
-    const [notes, setNotes] = useState({});
+    const [isRecording, setIsRecording] = useState(false);
 
-    useEffect(() => {
-        fetch('/notes.json')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Fetched data:', data); //Checks if data is being fetched
-                setNotes(data);
-            })
-            .catch(error => console.error('Error fetching notes:', error));
-    }, []);
+    const handleStartRecording = async () => {
+        if (isRecording) return; // Prevent starting a new recording if one is already active
+        setIsRecording(true);
+        try {
+            await startRecording();
+        } catch (error) {
+            console.error("Error starting recording:", error);
+            setIsRecording(false);
+        }
+    };
+
+    const handleStopRecording = async () => {
+        if (!isRecording) return; // Prevent stopping if no recording is active
+        try {
+            await stopRecording();
+        } catch (error) {
+            console.error("Error stopping recording:", error);
+        } finally {
+            setIsRecording(false);
+        }
+    };
 
     return (
         <div className="App">
-            <NotesUI notes={notes} />
+            <h1>Zoom/Google Meet Audio Recorder</h1>
+            <button onClick={handleStartRecording} disabled={isRecording}>
+                Start Recording
+            </button>
+            <button onClick={handleStopRecording} disabled={!isRecording}>
+                Stop Recording
+            </button>
         </div>
     );
 }
