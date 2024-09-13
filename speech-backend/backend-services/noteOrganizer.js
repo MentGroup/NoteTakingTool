@@ -53,12 +53,21 @@ const storeOrganizedNotes = (organizedNotes) => {
 // Converts organized notes into a JSON format for easy storage and/or further processing
 
 const organizeNotesByTopic = async (transcript) => {
+    console.log("Starting organization...");
+    
     const topics = await identifyKeyTopics(transcript);
+    console.log("Identified Topics:", topics);
+
     const notes = await generateNotes(transcript);
+    console.log("Generated Notes:", notes);
+
     const organizedNotes = groupNotesByTopic(notes.split('\n'), topics);
+    console.log("Organized Notes:", organizedNotes);
+
     storeOrganizedNotes(organizedNotes);
     return organizedNotes;
 };
+
 // This function acts as the workflow, coordinating all the other functions
 
 module.exports = { organizeNotesByTopic };

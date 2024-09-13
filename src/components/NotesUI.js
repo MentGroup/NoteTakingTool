@@ -1,26 +1,60 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './NotesUI.css';
 import { jsPDF } from "jspdf";
 import html2canvas from 'html2canvas';
 
 const NotesUI = ({ notes = {} }) => {
+    const [editableNotes, setEditableNotes] = useState({});
+
+    // Update editableNotes when notes prop changes
+    useEffect(() => {
+        setEditableNotes(notes);
+    }, [notes]);
+
+    const handleContentChange = (topic, index, event) => {
+        const updatedNotes = { ...editableNotes };
+        updatedNotes[topic][index] = event.target.innerText;
+        setEditableNotes(updatedNotes);
+    };
+
     const renderNotes = () => {
-        return Object.entries(notes).map(([topic, notes]) => (
+        if (Object.keys(editableNotes).length === 0) {
+            return <div>No notes available</div>;
+        }
+
+        return Object.entries(editableNotes).map(([topic, notesList]) => (
             <div key={topic}>
                 <div className="topic">{topic}</div>
-                {notes.map((note, index) => (
-                    <div key={index} className="note" contentEditable={true}>
-                        {note}
+                {Array.isArray(notesList) ? (
+                    notesList.map((note, index) => (
+                        <div
+                            key={index}
+                            className="note"
+                            contentEditable={true}
+                            suppressContentEditableWarning={true}
+                            onBlur={(event) => handleContentChange(topic, index, event)}
+                        >
+                            {note}
+                        </div>
+                    ))
+                ) : (
+                    <div
+                        className="note"
+                        contentEditable={true}
+                        suppressContentEditableWarning={true}
+                        onBlur={(event) => handleContentChange(topic, 0, event)}
+                    >
+                        {notesList}
                     </div>
-                ))}
+                )}
             </div>
         ));
     };
 
     const downloadNotes = () => {
         const doc = new jsPDF();
-        const title = prompt("Enter a title for your notes:", "Meeting Notes"); //Prompts user to enter a title for the PDF
-        if (!title) return; // Exit if no name is provided
+        const title = prompt("Enter a title for your notes:", "Meeting Notes");
+        if (!title) return;
 
         const notesContainer = document.getElementById('notes-container');
 
@@ -28,8 +62,8 @@ const NotesUI = ({ notes = {} }) => {
             const imgData = canvas.toDataURL('image/png');
             const pdf = new jsPDF('p', 'mm', 'a4');
             
-            const imgWidth = 210; 
-            const pageHeight = 297; 
+            const imgWidth = 210;
+            const pageHeight = 297;
             const imgHeight = canvas.height * imgWidth / canvas.width;
             let heightLeft = imgHeight;
 
@@ -45,10 +79,9 @@ const NotesUI = ({ notes = {} }) => {
                 heightLeft -= pageHeight;
             }
 
-            pdf.save(`${title}.pdf`); // Use the entered name for the PDF file
+            pdf.save(`${title}.pdf`);
         });
     };
-    
 
     return (
         <div>
