@@ -5,6 +5,7 @@ import html2canvas from 'html2canvas';
 
 const NotesUI = ({ notes = {} }) => {
     const [editableNotes, setEditableNotes] = useState({});
+    let debounceTimer; // Define debounceTimer in the component scope
 
     // Update editableNotes when notes prop changes
     useEffect(() => {
@@ -15,7 +16,13 @@ const NotesUI = ({ notes = {} }) => {
     const handleContentChange = (topic, index, event) => {
         const updatedNotes = { ...editableNotes };
         updatedNotes[topic][index] = event.target.innerText;
-        setEditableNotes(updatedNotes);
+
+        // Debounce state update
+        clearTimeout(debounceTimer); // Clear any existing timers before setting a new one
+        debounceTimer = setTimeout(() => {
+            setEditableNotes(updatedNotes);
+            console.log("Notes updated:", updatedNotes);
+        }, 300);  // 300ms debounce time
     };
 
     // Render the notes

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import NotesUI from './components/NotesUI';
-import { startSpeechRecognition, stopRecognition, getFinalTranscript } from './services/audioRecording';
+import { startSpeechRecognition, stopRecognition, getFinalTranscript, resetTranscript } from './services/audioRecording';
 
 function App() {
     const [isRecording, setIsRecording] = useState(false);
@@ -17,7 +17,9 @@ function App() {
             setIsRecording(false);
         }
     };
-
+    const handleReset = () => {
+        resetTranscript();  // Manually reset the transcript
+    };
     const handleStopRecording = async () => {
         try {
             console.log("Stopping recognition...");
@@ -53,6 +55,7 @@ function App() {
             <button onClick={handleStopRecording} disabled={!isRecording}>
                 Stop Recording
             </button>
+            <button onClick={handleReset}>Reset</button>
             <NotesUI notes={generatedNotes} /> {/* Pass generated notes to your NotesUI */}
         </div>
     );
