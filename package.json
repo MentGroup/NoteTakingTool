@@ -34,18 +34,15 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
-    "eject": "react-app-rewired eject"
+    "start": "concurrently \"npm run start-client\" \"npm run start-server\"",
+    "start-client": "react-scripts start", 
+    "start-server": "cd speech-backend && node server.js", 
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0",
-    "@babel/plugin-proposal-private-property-in-object": "^7.14.5",
-    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
-    "@babel/plugin-transform-runtime": "^7.16.8",
-    "@babel/preset-env": "^7.16.11",
-    "@babel/preset-react": "^7.16.7",
+    "concurrently": "^9.0.1",
     "react-app-rewired": "^2.2.1"
   },
   "browserslist": {
