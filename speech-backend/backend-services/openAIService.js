@@ -1,43 +1,82 @@
-require('dotenv').config();  // Load environment variables from .env file
+require('dotenv').config();
+const { OpenAI } = require('openai');
+const openai = new OpenAI({ apiKey: process.env.REACT_APP_OPENAI_API_KEY });
 
-console.log("OpenAI API Key:", process.env.REACT_APP_OPENAI_API_KEY); // Check if API key is loaded
-
-const { OpenAI } = require("openai");
-
-// Initialize the OpenAI client with the API key from environment variables
-const openai = new OpenAI({
-    apiKey: process.env.REACT_APP_OPENAI_API_KEY,  // Using environment variable
-});
-
-const generateNotes = async (transcript, retries = 3) => {
+// Function to generate notes from transcript using OpenAI GPT-3.5 Turbo
+const generateNotes = async (transcript) => {
     const messages = [
-        { role: "system", content: "You are an expert note-taking assistant that specializes in summarizing and simplifying information into clear, concise, topic-specefic, and easy-to-understand notes. Format each topic clearly marked as '### Topic Name ###' followed by notes under each topic."},
-        { role: "user", content: `Please analyze the following transcript and organize it into detailed, easy-to-read notes which are easy to understand for a wide audience. Make sure each topic is clearly marked as "### Topic Name ###" and each note should be indented under it's relevant topic. Each note under a topic should be specific, concise, and relevant, ranging from a few words to two sentences long. Focus on the main points and ensure the notes are easy to understand for everyone, even those with no prior knowledge. Avoid redundancy and focus on capturing the key points effectively:\n\n${transcript}` }
-        //Tring to format response so it will be easy for noteOrganizer.js to organize notes to respective topics
-    ];
-    
-    for (let attempt = 1; attempt <= retries; attempt++) { // For loop in case GPT-3 is having issues we can retry 3 times
-        try {
-            const response = await openai.chat.completions.create({
-                model: "gpt-3.5-turbo",  // Choose the appropriate GPT-3 model
-                messages: messages,
-                max_tokens: 500, // Adjust the token limit as needed
-                temperature: 0.6, // Adjust creativity
-            });
-
-            const notes = response.choices[0].message.content.trim(); // Extract the notes from the response
-            console.log('Generated Notes:', notes); // Log the generated notes
-            return notes; // Return the notes
-        } catch (error) {
-            console.error(`Error generating notes (Attempt ${attempt} of ${retries}):`, error); // Log the error
-            if (attempt === retries) {
-                console.error("Max retries reached. Could not generate notes."); // Log if run out of retries
-                return null;
-            }
+        {
+            role: 'system',
+            content: 'You are an expert note-taking assistant. Your job is to summarize and organize transcripts into clear, concise notes categorized by topics. Format each topic clearly as "### Topic Name ###" and list the notes below each topic with proper indentation.'
+        },
+        {
+            role: 'user',
+            content: `Analyze the following transcript and generate well-organized notes. Ensure each topic is labeled as "### Topic Name ###" and each note is relevant, concise, and indented under the appropriate topic. Keep each note specific and between one to two sentences:\n\n${transcript}`
         }
+    ];
+
+    try {
+        const response = await openai.chat.completions.create({
+            model: 'gpt-3.5-turbo',
+            messages,
+            max_tokens: 500,  // Adjust token limit if necessary
+            temperature: 0.6,  // Balance between creativity and accuracy
+        });
+
+        console.log("GPT generated response:", response.choices[0].message.content);
+        return response.choices[0].message.content.trim();
+    } catch (error) {
+        console.error('Error generating notes:', error);
+        throw error;  // Re-throw for handling in calling function
     }
 };
 
-module.exports = {
-    generateNotes, // Export the generateNotes function
+
+// Function to organize notes by topic
+const groupNotesByTopic = (notes) => {
+    const organizedNotes = {};
+    let currentTopic = null;
+
+    // Split notes by lines and process each line
+    notes.split('\n').forEach((note) => {
+        note = note.trim();
+        if (!note) return; // Skip empty lines
+
+        // Check if the line represents a topic header (### Topic Name ###)
+        if (note.startsWith('###') && note.endsWith('###')) {
+            currentTopic = note.slice(3, -3).trim(); // Extract topic name
+            organizedNotes[currentTopic] = [];
+        } 
+        // Otherwise, add the note to the current topic
+        else if (currentTopic) {
+            organizedNotes[currentTopic].push(note);
+        }
+    });
+
+    return organizedNotes;
 };
+
+// Main function to handle the entire transcript-to-notes process
+const organizeNotesByTopic = async (transcript) => {
+    try {
+        // Generate raw notes from the transcript
+        const rawNotes = await generateNotes(transcript);
+
+        // Log the raw response from GPT-3 to verify format
+        console.log("Raw notes from GPT:", rawNotes);
+
+        // Organize the generated notes by topics
+        const organizedNotes = groupNotesByTopic(rawNotes);
+
+        // Log the organized notes
+        console.log("Organized notes:", organizedNotes);
+        
+        return organizedNotes;  // Return the final organized notes
+    } catch (error) {
+        console.error('Error organizing notes:', error);
+        throw error;
+    }
+};
+
+// Export the main function
+module.exports = { organizeNotesByTopic, generateNotes };

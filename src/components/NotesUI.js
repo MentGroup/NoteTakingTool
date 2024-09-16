@@ -11,12 +11,14 @@ const NotesUI = ({ notes = {} }) => {
         setEditableNotes(notes);
     }, [notes]);
 
+    // Handle content changes on note edit
     const handleContentChange = (topic, index, event) => {
         const updatedNotes = { ...editableNotes };
         updatedNotes[topic][index] = event.target.innerText;
         setEditableNotes(updatedNotes);
     };
 
+    // Render the notes
     const renderNotes = () => {
         if (Object.keys(editableNotes).length === 0) {
             return <div>No notes available</div>;
@@ -32,7 +34,7 @@ const NotesUI = ({ notes = {} }) => {
                             className="note"
                             contentEditable={true}
                             suppressContentEditableWarning={true}
-                            onBlur={(event) => handleContentChange(topic, index, event)}
+                            onInput={(event) => handleContentChange(topic, index, event)}
                         >
                             {note}
                         </div>
@@ -42,7 +44,7 @@ const NotesUI = ({ notes = {} }) => {
                         className="note"
                         contentEditable={true}
                         suppressContentEditableWarning={true}
-                        onBlur={(event) => handleContentChange(topic, 0, event)}
+                        onInput={(event) => handleContentChange(topic, 0, event)}
                     >
                         {notesList}
                     </div>
@@ -51,6 +53,7 @@ const NotesUI = ({ notes = {} }) => {
         ));
     };
 
+    // Download notes as a PDF
     const downloadNotes = () => {
         const doc = new jsPDF();
         const title = prompt("Enter a title for your notes:", "Meeting Notes");

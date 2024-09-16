@@ -1,74 +1,78 @@
 require('dotenv').config();  // Load environment variables from .env file
-
 const { OpenAI } = require("openai");
 const openai = new OpenAI({
     apiKey: process.env.REACT_APP_OPENAI_API_KEY,  // Initialize OpenAI with the API key from environment variables
 });
-// Import OpenAI Library so we can organize notes
 
-const { generateNotes } = require('./openAIService');  // Import the generateNotes function from openAIService.js
+// Function to generate notes from transcript using OpenAI GPT-3.5 Turbo
+const generateNotes = async (transcript) => {
+    const messages = [
+        {
+            role: 'system',
+            content: 'You are an expert note-taking assistant. Your job is to summarize and organize transcripts into clear, concise notes categorized by topics. Format each topic clearly as "### Topic Name ###" and list the notes below each topic with proper indentation.'
+        },
+        {
+            role: 'user',
+            content: `Analyze the following transcript and generate well-organized notes. Ensure each topic is labeled as "### Topic Name ###" and each note is relevant, concise, and indented under the appropriate topic. Keep each note specific and between one to two sentences:\n\n${transcript}`
+        }
+    ];
 
-const identifyKeyTopics = async (transcript) => {
-    const response = await openai.chat.completions.create({
-        model: "gpt-3.5-turbo",
-        messages: [
-            { role: "system", content: "You are an assistant that identifies key topics from transcripts." },
-            { role: "user", content: `List the key topics discussed in the following transcript:\n\n${transcript}` }
-            // Asks GPT-3 to list key topics
-        ],
-        max_tokens: 100,
-    });
-    const topics = response.choices[0].message.content.trim().split('\n');
-    return topics;
-    // Returns list of topics as an array
+    try {
+        const response = await openai.chat.completions.create({
+            model: 'gpt-3.5-turbo',
+            messages,
+            max_tokens: 500,  // Adjust token limit if necessary
+            temperature: 0.6,  // Balance between creativity and accuracy
+        });
+
+        console.log("GPT generated response:", response.choices[0].message.content);
+        return response.choices[0].message.content.trim();
+    } catch (error) {
+        console.error('Error generating notes:', error);
+        throw error;  // Re-throw for handling in calling function
+    }
 };
-// This function sends the transcript to GPT-3 and identifies key topics
 
+
+// Function to organize notes by topic
 const groupNotesByTopic = (notes) => {
     const organizedNotes = {};
     let currentTopic = null;
 
-    notes.forEach(note => { //Loop through each note in the array 
+    // Split notes by lines and process each line
+    notes.split('\n').forEach((note) => {
         note = note.trim();
-        if (!note) return; //Skip empty notes
+        if (!note) return; // Skip empty lines
 
-        // Check if the note is a topic header (e.g., "### Topic Name ###")
-        if (note.startsWith("###") && note.endsWith("###")) {
-            currentTopic = note.slice(3, -3).trim(); // Extract the topic
+        // Check if the line represents a topic header (### Topic Name ###)
+        if (note.startsWith('###') && note.endsWith('###')) {
+            currentTopic = note.slice(3, -3).trim(); // Extract topic name
             organizedNotes[currentTopic] = [];
-        } else if (currentTopic) {
-            organizedNotes[currentTopic].push(note); // If not a topic, extract and add the note to the current topic
+        } 
+        // Otherwise, add the note to the current topic
+        else if (currentTopic) {
+            organizedNotes[currentTopic].push(note);
         }
     });
 
     return organizedNotes;
 };
-// This function organizes the generated notes into key topics
 
-const storeOrganizedNotes = (organizedNotes) => {
-    const organizedNotesJSON = JSON.stringify(organizedNotes, null, 2);
-    console.log("Organized Notes JSON:", organizedNotesJSON);
-    // Save the JSON to a file or database here.
-};
-// Converts organized notes into a JSON format for easy storage and/or further processing
-
+// Main function to handle the entire transcript-to-notes process
 const organizeNotesByTopic = async (transcript) => {
-    console.log("Starting organization...");
-    
-    const topics = await identifyKeyTopics(transcript);
-    console.log("Identified Topics:", topics);
-
-    const notes = await generateNotes(transcript);
-    console.log("Generated Notes:", notes);
-
-    const organizedNotes = groupNotesByTopic(notes.split('\n'), topics);
-    console.log("Organized Notes:", organizedNotes);
-
-    storeOrganizedNotes(organizedNotes);
-    return organizedNotes;
+    try {
+        // Generate raw notes from the transcript
+        const rawNotes = await generateNotes(transcript);
+        
+        // Organize the generated notes by topics
+        const organizedNotes = groupNotesByTopic(rawNotes);
+        
+        return organizedNotes;  // Return the final organized notes
+    } catch (error) {
+        console.error('Error organizing notes:', error);
+        throw error;
+    }
 };
 
-// This function acts as the workflow, coordinating all the other functions
-
+// Export the main function
 module.exports = { organizeNotesByTopic };
-// Export the organizeNotesByTopic function for use in other modules

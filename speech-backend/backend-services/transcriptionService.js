@@ -1,46 +1,65 @@
 const speech = require('@google-cloud/speech');
-// Import statements
+const fs = require('fs');
+const path = require('path');
+const ffmpeg = require('fluent-ffmpeg');
 
+// Google Cloud Speech-to-Text client
 const client = new speech.SpeechClient({
-    keyFilename: process.env.REACT_APP_GOOGLE_APPLICATION_CREDENTIALS, //Using environment variable
+    keyFilename: process.env.REACT_APP_GOOGLE_APPLICATION_CREDENTIALS,
 });
-// Creating client variable to interact with Google Speech-to-Text API
 
-const transcribeAudioBlob = async (audioBlob) => {
-    // Convert the blob to base64
-    const reader = new FileReader();
-    reader.readAsDataURL(audioBlob);
+// Function to transcribe audio using Google Cloud Speech-to-Text API
+export const transcribeAudio = async (audioFilePath) => {
+    const audioBytes = fs.readFileSync(audioFilePath).toString('base64');
+    const request = {
+        audio: { content: audioBytes },
+        config: {
+            encoding: 'WEBM_OPUS',
+            languageCode: 'en-US',
+        },
+    };
 
+    try {
+        const [response] = await client.recognize(request);
+        const transcription = response.results
+            .map(result => result.alternatives[0].transcript)
+            .join('\n');
+        return transcription;
+    } catch (error) {
+        console.error('Error during transcription:', error);
+        throw error;
+    }
+};
+
+const convertToWav = (inputPath, outputPath) => {
     return new Promise((resolve, reject) => {
-        reader.onloadend = async () => {
-            const base64Audio = reader.result.split(',')[1];
-
-            const request = {
-                audio: { content: base64Audio },
-                config: {
-                    encoding: 'WEBM_OPUS',
-                    languageCode: 'en-US',
-                },
-            };
-
-            try {
-                const [response] = await client.recognize(request);
-                const transcription = response.results
-                    .map(result => result.alternatives[0].transcript)
-                    .join('\n');
-                resolve(transcription);
-            } catch (error) {
-                reject(error);
-            }
-        };
-
-        reader.onerror = (error) => {
-            reject(error);
-        };
+        ffmpeg(inputPath)
+            .toFormat('wav')
+            .on('end', () => {
+                resolve(outputPath);
+            })
+            .on('error', (err) => {
+                reject(err);
+            })
+            .save(outputPath);
     });
 };
-// This function sends a request to Google Speech-to-Text to transcribe audio
 
-module.exports = {
-    transcribeAudioBlob
+const processAudioFile = async (audioFilePath) => {
+    try {
+        const outputPath = `${audioFilePath}.wav`;
+        await convertToWav(audioFilePath, outputPath);
+        const transcript = await transcribeAudio(outputPath);
+
+        fs.unlink(outputPath, (err) => {
+            if (err) console.error('Error deleting WAV file:', err);
+        });
+
+        return transcript;
+    } catch (error) {
+        console.error('Error processing audio file:', error);
+        return null;
+    }
 };
+
+module.exports = { processAudioFile };
