@@ -9,13 +9,37 @@ const generateNotes = async (transcript) => {
     const messages = [
         {
             role: 'system',
-            content: 'You are an expert note-taking assistant. Your job is to summarize and organize transcripts into clear, concise notes categorized by topics. Format each topic clearly as "### Topic Name ###" and list the notes below each topic with proper indentation.'
+            content: `You are an expert note-taking assistant. Your job is to summarize and organize the provided transcript into three sections:
+            1. "Main Topics of Discussion": The key areas or topics discussed.
+            2. "Key Takeaways": The main points or conclusions that were derived.
+            3. "Next Steps/To Do's": Any action items, tasks, or next steps that were mentioned.
+    
+            Each section should have at least one bullet point. If there is no content available for a section, return "None" for that section.
+    
+            Use the following format:
+            **Main Topics of Discussion:**
+            - [Main topic 1]
+            - [Main topic 2]
+            ...
+    
+            **Key Takeaways:**
+            - [Key takeaway 1]
+            - [Key takeaway 2]
+            ...
+    
+            **Next Steps/To Do's:**
+            - [Next step 1]
+            - [Next step 2]
+            ...
+    
+            Ensure the response adheres strictly to this format, even if some sections are empty.`
         },
         {
             role: 'user',
-            content: `Analyze the following transcript and generate well-organized notes. Ensure each topic is labeled as "### Topic Name ###" and each note is relevant, concise, and indented under the appropriate topic. Keep each note specific and between one to two sentences:\n\n${transcript}`
+            content: `Here is the transcript: \n\n${transcript}`
         }
     ];
+    
 
     try {
         const response = await openai.chat.completions.create({

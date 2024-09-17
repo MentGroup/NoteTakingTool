@@ -2,29 +2,27 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 
-const { organizeNotesByTopic } = require('./backend-services/openAIService'); // Assuming you already have this function
+const { generateStructuredNotes } = require('./backend-services/openAIService'); 
 
 const app = express();
 app.use(cors());
-app.use(express.json()); // Middleware to parse JSON body data
-
-
+app.use(express.json()); 
 
 // API endpoint to handle the transcript and generate notes
 app.post('/transcribe', async (req, res) => {
     try {
-        const { transcript } = req.body; // Extract 'transcript' from the request body
+        const { transcript } = req.body;
         if (!transcript || typeof transcript !== 'string') {
             return res.status(400).json({ error: 'Invalid or missing transcript.' });
         }
 
-        // Generate notes based on the transcript
-        const notes = await organizeNotesByTopic(transcript);  // Use your service function to generate notes
+        // Generate structured notes based on the transcript
+        const notes = await generateStructuredNotes(transcript);
         if (!notes) {
             return res.status(500).json({ error: 'Failed to generate notes.' });
         }
 
-        // Return the notes to the frontend
+        // Return the structured notes to the frontend
         res.json({ notes });
     } catch (error) {
         console.error('Error during note generation:', error);

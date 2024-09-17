@@ -25,6 +25,7 @@
     "querystring-es3": "^0.2.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-icons": "^5.3.0",
     "react-scripts": "5.0.1",
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
@@ -35,14 +36,16 @@
   },
   "scripts": {
     "start": "concurrently \"npm run start-client\" \"npm run start-server\"",
-    "start-client": "react-scripts start", 
-    "start-server": "cd speech-backend && node server.js", 
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start-client": "react-app-rewired start",
+    "start-server": "cd speech-backend && node server.js",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "concurrently": "^9.0.1",
+    "customize-cra": "^1.0.0",
     "react-app-rewired": "^2.2.1"
   },
   "browserslist": {

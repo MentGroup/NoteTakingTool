@@ -1,110 +1,73 @@
-body {
-    background-color: #f7f1e3; 
-    font-family: 'Georgia', serif; 
-}
-
-#notes-container {
+/* Container for the notes section */
+.notes-container {
     padding: 30px;
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
-    background-color: #faf3e0;
-    border: 1px solid #e1d8b4;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
     border-radius: 10px;
-    background-image: url('../assets/paper-texture.jpeg'); 
-    background-size: cover;
-    background-repeat: no-repeat;
-    position: relative;
+    box-shadow: 0 8px 24px rgba(70, 130, 180, 0.2); /* Adding slight shadow for better contrast */
 }
 
-/* Topic styling */
-.topic {
-    font-size: 2em; 
+/* Each section (e.g. Main Topics of Discussion, Key Takeaways, Next Steps) */
+.section {
+    margin-bottom: 20px;
+}
+
+/* Section titles (e.g. Main Topics of Discussion, Key Takeaways, etc.) */
+.section-title {
+    font-size: 1.7em;
     font-weight: bold;
-    margin-top: 30px;
-    margin-bottom: 10px;
     text-align: left;
-    text-decoration: underline;
+    color: #333;
 }
 
-/* The container for the download button and instruction text */
+/* List styling for notes, removing default padding and bullet points */
+.section-content {
+    padding-left: 0;  /* Remove default padding from ul */
+    list-style-type: none; /* Remove bullet points */
+}
+
+/* Each individual note */
+.note-item {
+    font-size: 1.3em;
+    margin-bottom: 10px;
+    line-height: 1.5;
+    color: #666; /* Slightly lighter text color */
+    padding: 10px;
+    background-color: #f9f9f9;  /* Default background for note */
+    border-radius: 8px;
+    transition: box-shadow 0.3s ease, background-color 0.3s ease; /* Adding transition for box-shadow and background */
+    cursor: text;  /* Indicating that it's editable */
+}
+
+/* Hover effect on individual notes */
+.note-item:hover {
+    box-shadow: 0 8px 24px rgba(70, 130, 180, 0.4); /* Blueish-grey shadow when hovered */
+    background-color: #eef2f9;  /* Slight background color change on hover for clarity */
+}
+
+/* Container for the download button */
 #bottom-right-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 40px;
-    width: 100%;
-    position: relative;
-    padding: 0 20px;
+    justify-content: flex-end;
+    margin-top: 20px;
 }
 
-.note {
-    font-size: 1.6em;
-    margin-left: 20px;
-    margin-bottom: 20px;
-    padding: 10px 15px;
-    border-left: 4px solid #d1a054;
-    background-color: rgba(255, 255, 255, 0.7);
-    line-height: 1.6;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: left;
-    text-indent: 20px;
-    outline: none;
-    transition: background-color 0.3s ease;
-    caret-color: black;
-}
-
-.note:hover {
-    background-color: #e0e0e0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    border-left: 4px solid #b08d57;
-}
-
-/* Note styling */
-.note {
-    font-size: 1.6em; 
-    margin-left: 20px;
-    margin-bottom: 20px;
-    padding: 10px 15px;
-    border-left: 4px solid #d1a054; 
-    background-color: rgba(255, 255, 255, 0.7); 
-    line-height: 1.6;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-    text-align: left; 
-    text-indent: 20px; 
-    outline: none;
-}
-
-/*Download Button */
+/* Download button styling */
 .download-btn {
-    padding: 16px 32px;
-    background-color: #007bff; 
+    padding: 12px 24px;
+    background-color: #007bff; /* Primary blue color */
     color: white;
     border: none;
     cursor: pointer;
-    font-size: 2em;
-    border-radius: 10px;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 10px; /* Adjust spacing between the button and instruction text */
+    font-size: 1.2em;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions for hover effects */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for button */
 }
 
+/* Hover effect for the download button */
 .download-btn:hover {
-    background-color: #0056b3; 
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-}
-
-/* Small instruction text */
-.instruction-text {
-    font-size: 1.8em; 
-    font-weight: bold; 
-    font-style: italic; 
-    text-decoration: underline; 
-    color: black; 
-    font-family: 'Times New Roman', serif;
-    position: absolute;
-    right: 50px;
-    bottom: 30px;
+    background-color: #0056b3; /* Darker blue on hover */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Slightly more pronounced shadow on hover */
 }
